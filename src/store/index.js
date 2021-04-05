@@ -7,7 +7,7 @@ export default createStore({
     user: {
       firstName: '',
       lastName: '',
-      githubUsername: '',
+      username: '',
       email: '',
       isAgreeToTerms: false,
     },
