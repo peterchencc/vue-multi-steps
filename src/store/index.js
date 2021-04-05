@@ -1,20 +1,25 @@
 import { createStore } from 'vuex'
 
+const getDefaultUser = () => {
+  return {
+    firstName: '',
+    lastName: '',
+    username: '',
+    email: '',
+    isAgreeToTerms: false,
+  }
+}
+
 export default createStore({
   strict: process.env.NODE_ENV !== 'production',
   state: {
-    currentStep: 1,
-    user: {
-      firstName: '',
-      lastName: '',
-      username: '',
-      email: '',
-      isAgreeToTerms: false,
-    },
+    user: getDefaultUser(),
+    users: [],
   },
   mutations: {
-    increment: (state) => state.currentStep++,
-    decrement: (state) => state.currentStep--,
+    resetUserState(state) {
+      Object.assign(state.user, getDefaultUser())
+    },
     updateFirstName(state, payload) {
       state.user.firstName = payload
     },
@@ -30,7 +35,19 @@ export default createStore({
     updateIsAgreeToTerms(state, payload) {
       state.user.isAgreeToTerms = payload
     },
+    addUser(state, payload) {
+      // state.users.push(payload)
+      state.users = [...state.users, payload]
+    },
   },
-  actions: {},
+  actions: {
+    resetUserState({ commit }) {
+      commit('resetUserState')
+    },
+    // addUser({ commit }, userObject) {
+    //   commit('addUser', userObject)
+    //   commit('resetUserState')
+    // },
+  },
   modules: {},
 })
