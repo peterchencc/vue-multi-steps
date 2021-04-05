@@ -7,7 +7,7 @@
     id="frist-name"
     name="firstName"
     :rules="firstNameRules"
-    v-model="firstName"
+    v-model.trim="firstName"
   />
   <ErrorMessage name="firstName" />
 
@@ -17,7 +17,7 @@
     id="last-name"
     name="lastName"
     :rules="lastNameRules"
-    v-model="lastName"
+    v-model.trim="lastName"
   />
   <ErrorMessage name="lastName" />
 
@@ -27,7 +27,7 @@
     id="username"
     name="username"
     :rules="usernameRules"
-    v-model="username"
+    v-model.trim="username"
   />
   <ErrorMessage name="username" />
 </template>
@@ -44,9 +44,18 @@ export default {
   },
   data() {
     return {
-      firstNameRules: yup.string().required(),
-      lastNameRules: yup.string().required(),
-      usernameRules: yup.string().required(),
+      firstNameRules: yup
+        .string()
+        .trim()
+        .required(),
+      lastNameRules: yup
+        .string()
+        .trim()
+        .required(),
+      usernameRules: yup
+        .string()
+        .trim()
+        .required(),
     }
   },
   computed: {
