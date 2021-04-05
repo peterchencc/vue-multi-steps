@@ -1,15 +1,48 @@
 <template>
   <h2>step 3</h2>
   <label for="email">User Email</label>
-  <input type="email" id="email" v-model="email" />
+  <Field
+    type="email"
+    id="email"
+    name="email"
+    :rules="emailRules"
+    v-model="email"
+  />
+  <ErrorMessage name="email" />
 
-  <input type="checkbox" id="checkbox" v-model="isAgreeToTerms" />
-  <label for="checkbox">Agree to Terms and Services</label>
+  <Field
+    type="checkbox"
+    id="terms"
+    name="terms"
+    :rules="termsRules"
+    :value="true"
+    v-model="isAgreeToTerms"
+  />
+  <label for="terms">Agree to Terms and Services</label>
+  <ErrorMessage name="terms" />
 </template>
 
 <script>
+import { Field, ErrorMessage } from 'vee-validate'
+import * as yup from 'yup'
+
 export default {
   name: 'FormTwo',
+  components: {
+    Field,
+    ErrorMessage,
+  },
+  data() {
+    return {
+      emailRules: yup
+        .string()
+        .required()
+        .email(),
+      termsRules: yup
+        .boolean()
+        .required('You must agree to terms and conditions'),
+    }
+  },
   computed: {
     email: {
       get() {
