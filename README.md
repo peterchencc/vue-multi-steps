@@ -17,6 +17,30 @@ By filling up the form step-by-step, you will get more information from Github A
 - Axios
 - Jest
 
+## Project setup
+
+To run this project, use the following commands in your terminal:
+
+```
+# clone the repository
+git clone git@github.com:peterchencc/vue-multi-steps.git
+
+# change the folder
+cd vue-multi-steps
+
+# install dependencies
+npm install
+
+# Compiles and hot-reloads for development
+npm run serve
+
+# Compiles and minifies for production
+npm run build
+
+# Run unit tests
+npm run test:unit
+```
+
 ## Project structure
 
 The home page contain two part, `<Form>` wrapper and `<UserDetail>` component. vee-validate offers many helpers to handle form validation. Using `<Form>` wrapper with `handleSubmit` slot to handle form submissions manually by clicking "next" button and trigger a callback to next step.
@@ -26,8 +50,6 @@ Switch between each steps by dynamic components. Every step with required input 
 The `<UserDetail>` component shows up only when user finish the steps and submit the from. It will fetch the GitHub API with username to get response data and show the avatar image.
 
 ## Gotchas
-
-### Special Stuffs
 
 ### Add HTML `autofocus` attribute on the first text field
 
@@ -57,7 +79,7 @@ On the app.
 
 Small change on the HTML structure and keep the UI with more intuitive UX.
 
-- Use CSS Grid in `<UserDetail>` component to display responsive layout
+### Use CSS Grid in `<UserDetail>` component to display responsive layout
 
 ### Bonus: workflow can be browsed using the native browser's "back" / "next" buttons
 
@@ -95,27 +117,3 @@ But it didn't work out at the end. Not sure what happened here. I've done the sa
 - Improve the error handling of fetching GitHub API.
 - With or without Vuex for this project?
 - More testing
-
-## Project setup
-
-To run this project, use the following commands in your terminal:
-
-```
-# clone the repository
-git clone git@github.com:peterchencc/vue-multi-steps.git
-
-# change the folder
-cd vue-multi-steps
-
-# install dependencies
-npm install
-
-# Compiles and hot-reloads for development
-npm run serve
-
-# Compiles and minifies for production
-npm run build
-
-# Run unit tests
-npm run test:unit
-```
