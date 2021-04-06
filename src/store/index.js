@@ -14,7 +14,6 @@ export default createStore({
   strict: process.env.NODE_ENV !== 'production',
   state: {
     user: getDefaultUser(),
-    users: [],
   },
   mutations: {
     resetUserState(state) {
@@ -35,19 +34,11 @@ export default createStore({
     updateIsAgreeToTerms(state, payload) {
       state.user.isAgreeToTerms = payload
     },
-    addUser(state, payload) {
-      // state.users.push(payload)
-      state.users = [...state.users, payload]
-    },
   },
   actions: {
     resetUserState({ commit }) {
       commit('resetUserState')
     },
-    // addUser({ commit }, userObject) {
-    //   commit('addUser', userObject)
-    //   commit('resetUserState')
-    // },
   },
   modules: {},
 })
