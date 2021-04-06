@@ -13,7 +13,7 @@
       <div>Username: {{ user.username }}</div>
     </div>
 
-    <div class="github">
+    <div class="github-info">
       <div v-if="userHasData">
         <div>
           <img
@@ -97,6 +97,7 @@ export default {
   display: flex;
   margin: 50px auto;
 }
+
 @media (min-width: 768px) {
   .user-detail {
     display: grid;
@@ -114,7 +115,7 @@ export default {
     padding: 10px;
     margin: auto;
   }
-  .github {
+  .github-info {
     border: 1px solid #ddd;
     padding: 10px;
     margin: auto;

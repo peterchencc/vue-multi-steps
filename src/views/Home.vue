@@ -4,8 +4,6 @@
 
     <Form v-else v-slot="{ handleSubmit, values, errors }">
       <div class="step-card">
-        <div class="step-header"></div>
-
         <div class="step-body">
           <component
             :is="this.stepsList[this.currentStep]"
@@ -21,7 +19,7 @@
             :disabled="
               isFirstStep ? false : !validateBeforeSubmit(values, errors)
             "
-            @click="isLastStep ? onSubmit() : handleSubmit($event, toNext)"
+            @click="isLastStep ? finalSubmit() : handleSubmit($event, toNext)"
             type="button"
             class="btn-primary btn-next"
           >
@@ -89,7 +87,7 @@ export default {
 
       return noErrors && valuesAreNotEmpty(values)
     },
-    onSubmit() {
+    finalSubmit() {
       this.showUserDetail = true
     },
     toPrevious() {
@@ -120,6 +118,7 @@ export default {
   align-content: center;
   justify-items: center;
 }
+
 .step-card {
   padding: 20px;
   margin: 40px auto;
@@ -129,15 +128,18 @@ export default {
   max-width: 375px;
   border: solid 2px #dddddd;
 }
+
 .step-title {
   margin: 10px 0;
   font-size: 1.75rem;
   font-weight: bold;
 }
+
 .step-body {
   margin-bottom: 20px;
   min-height: 350px;
 }
+
 .step-footer {
   display: flex;
   justify-content: center;
@@ -187,18 +189,22 @@ button.btn-back {
   order: 2;
 }
 
+/* From Input & Error */
 .form-input {
   display: block;
   margin-bottom: 15px;
 }
+
 .form-input label {
   font-weight: 600;
 }
+
 .form-input span {
   color: #ff2626;
   font-size: 0.9rem;
   display: block;
 }
+
 .form-input .input-control[type='text'],
 .form-input .input-control[type='email'] {
   height: 45px;
@@ -208,16 +214,12 @@ button.btn-back {
   border: solid 1px #dddddd;
   border-radius: 4px;
 }
+
 .form-input .input-control[type='checkbox'] {
   margin-right: 5px;
 }
+
 .form-input .input-control.has-error {
-  border-color: #ff2626;
-}
-.form-input .input-control::placeholder {
-  color: rgba(119, 119, 119, 0.5);
-}
-.input-control-error {
   border-color: #ff2626;
 }
 </style>
