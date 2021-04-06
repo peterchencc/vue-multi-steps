@@ -111,9 +111,9 @@ I tried to add this kind of transition on the dynamic components. So it could ha
 
 But it didn't work out at the end. Not sure what happened here. I've done the same way under Vue.js 2 before and it worked.
 
-### What can improved?
+### What's next?
 
-- Refactor the `<FormOne>` `<FormTwo>`, wrap a reusable `<form-input>` component for them.
+- Refactor the `<FormOne>` `<FormTwo>`, and wrap a reusable `<form-input>` component for them.
 - Improve the error handling of fetching GitHub API.
 - With or without Vuex for this project?
-- More testing
+- More testing!
