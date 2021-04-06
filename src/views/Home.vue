@@ -1,8 +1,6 @@
 <template>
   <section class="container">
-    <UserDetail v-if="this.showUserDetail" @toRestart="toRestart" />
-
-    <Form v-else v-slot="{ handleSubmit, values, errors }">
+    <Form v-if="!this.showUserDetail" v-slot="{ handleSubmit, values, errors }">
       <div class="step-card">
         <div class="step-body">
           <component
@@ -15,11 +13,12 @@
           <div class="current-steps">
             <b>{{ this.currentStep + 1 }}</b> / {{ this.stepsList.length }}
           </div>
+
           <button
-            :disabled="
-              isFirstStep ? false : !validateBeforeSubmit(values, errors)
-            "
             @click="isLastStep ? finalSubmit() : handleSubmit($event, toNext)"
+            :disabled="
+              isFirstStep ? false : !validateCurrentStep(values, errors)
+            "
             type="button"
             class="btn-primary btn-next"
           >
@@ -37,6 +36,8 @@
         </div>
       </div>
     </Form>
+
+    <UserDetail v-else @toRestart="toRestart" />
   </section>
 </template>
 
@@ -74,7 +75,7 @@ export default {
     },
   },
   methods: {
-    validateBeforeSubmit(values, errors) {
+    validateCurrentStep(values, errors) {
       // check if validation's errors object is empty
       const noErrors = Object.keys(errors).length === 0
       // check each of the validation's values has value

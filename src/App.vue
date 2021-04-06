@@ -51,11 +51,6 @@ input {
   border-style: none;
 }
 
-a:focus,
-button:focus,
-input:focus {
-  outline-width: 0;
-}
 /* Reset Global selectors */
 
 main {
