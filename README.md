@@ -29,9 +29,9 @@ The `<UserDetail>` component shows up only when user finish the steps and submit
 
 ### Special Stuffs
 
-### Add `autofocus` on the first text field
+### Add HTML `autofocus` attribute on the first text field
 
-Browser will help to autofocus on first text field.
+Let the first input field automatically get focus when the component loads
 
 ### Use CSS `order` property to specify the order of "Back" "Next" button position
 
@@ -53,7 +53,7 @@ Placing the "Next" button follows the last input field in the HTML. User can pre
 ```
 
 On the app.
-![On the app.](./screenshots/order-button.png)
+![On the app.](./screenshots/order-button-page.png)
 
 Small change on the HTML structure and keep the UI with more intuitive UX.
 
