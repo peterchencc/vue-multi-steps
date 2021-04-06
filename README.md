@@ -19,7 +19,9 @@ By filling up the form step-by-step, you will get more information from Github A
 
 ## Project structure
 
-The home page contain two part, `<Form>` wrapper and `<UserDetail>` component. vee-validate offers many helpers to handle form submissions. I use `<Form>` component for the validation. Using `handleSubmit` slot to handle form submissions manually by clicking "next" button and accepts a callback to trigger to next step. Switching between these step by dynamic components. Every step inside with required input field `<Field> <ErrorMessage>` to handle errors and basic validation. The method `validateCurrentStep` will check the values and errors on each step, if the input on the current step is invalid, the "Next" button will be disabled.
+The home page contain two part, `<Form>` wrapper and `<UserDetail>` component. vee-validate offers many helpers to handle form validation. Using `<Form>` wrapper with `handleSubmit` slot to handle form submissions manually by clicking "next" button and trigger a callback to next step.
+
+Switch between each steps by dynamic components. Every step with required input field `<Field> <ErrorMessage>` to handle errors and basic validation. The method `validateCurrentStep` will check the values and errors on current step. If the value on the current step is invalid, the "Next" button will be disabled.
 
 The `<UserDetail>` component shows up only when user finish the steps and submit the from. It will fetch the GitHub API with username to get response data and show the avatar image.
 
