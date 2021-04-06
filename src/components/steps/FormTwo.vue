@@ -1,25 +1,33 @@
 <template>
-  <h2>step 3</h2>
-  <label for="email">User Email</label>
-  <Field
-    type="email"
-    id="email"
-    name="email"
-    :rules="emailRules"
-    v-model="email"
-  />
-  <ErrorMessage name="email" />
+  <div class="step-title">Almost there!</div>
 
-  <Field
-    type="checkbox"
-    id="terms"
-    name="terms"
-    :rules="termsRules"
-    :value="true"
-    v-model="isAgreeToTerms"
-  />
-  <label for="terms">Agree to Terms and Services</label>
-  <ErrorMessage name="terms" />
+  <div class="form-input">
+    <label for="email">User Email</label>
+    <Field
+      :class="inputClassObject('email')"
+      type="email"
+      id="email"
+      name="email"
+      :rules="emailRules"
+      v-model="email"
+      autofocus
+    />
+    <ErrorMessage class="input-error-msg" name="email" />
+  </div>
+
+  <div class="form-input">
+    <Field
+      :class="inputClassObject('terms')"
+      type="checkbox"
+      id="terms"
+      name="terms"
+      :rules="termsRules"
+      :value="true"
+      v-model="isAgreeToTerms"
+    />
+    <label for="terms">Agree to Terms and Services</label>
+    <ErrorMessage class="input-error-msg" name="terms" />
+  </div>
 </template>
 
 <script>
@@ -32,6 +40,11 @@ export default {
     Field,
     ErrorMessage,
   },
+  props: {
+    errors: {
+      type: Object,
+    },
+  },
   data() {
     return {
       emailRules: yup
@@ -40,7 +53,7 @@ export default {
         .email(),
       termsRules: yup
         .boolean()
-        .required('You must agree to terms and conditions'),
+        .required('You must agree to terms and services'),
     }
   },
   computed: {
@@ -59,6 +72,14 @@ export default {
       set(value) {
         this.$store.commit('updateIsAgreeToTerms', value)
       },
+    },
+  },
+  methods: {
+    inputClassObject(name) {
+      return {
+        'input-control': true,
+        'has-error': this.errors.hasOwnProperty(name),
+      }
     },
   },
 }

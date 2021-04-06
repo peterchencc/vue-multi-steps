@@ -1,28 +1,45 @@
 <template>
-  <div class="home">
-    <UserDetail v-if="this.showUserDetail">
-      <button @click="toRestart()" type="button">
-        restart
-      </button>
-    </UserDetail>
+  <section class="container">
+    <UserDetail v-if="this.showUserDetail" @toRestart="toRestart" />
 
     <Form v-else v-slot="{ handleSubmit, values, errors }">
-      <component :is="this.stepsList[this.currentStep]"></component>
-      <div class="">
-        <button @click="toPrevious" v-show="!isFirstStep" type="button">
-          Back
-        </button>
+      <div class="step-card">
+        <div class="step-header"></div>
 
-        <button
-          :disabled="!validateBeforeSubmit(values, errors)"
-          @click="isLastStep ? onSubmit() : handleSubmit($event, toNext)"
-          type="button"
-        >
-          {{ isLastStep ? `Submit` : `Next` }}
-        </button>
+        <div class="step-body">
+          <component
+            :is="this.stepsList[this.currentStep]"
+            :errors="errors"
+          ></component>
+        </div>
+
+        <div class="step-footer">
+          <div class="current-steps">
+            <b>{{ this.currentStep + 1 }}</b> / {{ this.stepsList.length }}
+          </div>
+          <button
+            :disabled="
+              isFirstStep ? false : !validateBeforeSubmit(values, errors)
+            "
+            @click="isLastStep ? onSubmit() : handleSubmit($event, toNext)"
+            type="button"
+            class="btn-primary btn-next"
+          >
+            {{ isLastStep ? `Submit` : `Next` }}
+          </button>
+
+          <button
+            @click="toPrevious"
+            v-show="!isFirstStep"
+            type="button"
+            class="btn-secondary btn-back"
+          >
+            Back
+          </button>
+        </div>
       </div>
     </Form>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -35,7 +52,13 @@ import UserDetail from '../components/UserDetail.vue'
 
 export default {
   name: 'Home',
-  components: { Form, Intro, FormOne, FormTwo, UserDetail },
+  components: {
+    Form,
+    Intro,
+    FormOne,
+    FormTwo,
+    UserDetail,
+  },
   data() {
     return {
       currentStep: 0,
@@ -69,18 +92,132 @@ export default {
     onSubmit() {
       this.showUserDetail = true
     },
-    toRestart() {
-      this.currentStep = 0
-      this.showUserDetail = false
-      this.resetUserState()
-    },
     toPrevious() {
       this.currentStep--
     },
     toNext() {
       this.currentStep++
     },
+    toRestart() {
+      this.currentStep = 0
+      this.showUserDetail = false
+      this.resetUserState()
+    },
     ...mapActions(['resetUserState']),
   },
 }
 </script>
+
+<style>
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-items: center;
+}
+.step-card {
+  padding: 20px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-width: 375px;
+  border: solid 2px #dddddd;
+}
+.step-title {
+  margin: 10px 0;
+  font-size: 1.75rem;
+  font-weight: bold;
+}
+.step-body {
+  margin-bottom: 20px;
+  min-height: 350px;
+}
+.step-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+  font-size: 1rem;
+}
+
+button {
+  display: block;
+  padding: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+button.btn-primary {
+  background-color: #064faf;
+  color: #fff;
+}
+
+button.btn-secondary {
+  color: #064faf;
+}
+
+button.btn-next {
+  order: 3;
+}
+
+button.btn-back {
+  order: 1;
+}
+
+.current-steps {
+  padding: 10px;
+  border-radius: 15px;
+  background-color: #eaeaea;
+  margin-right: 10px;
+  margin-left: auto;
+  order: 2;
+}
+
+.form-input {
+  display: block;
+  margin-bottom: 15px;
+}
+.form-input label {
+  font-weight: 600;
+}
+.form-input span {
+  color: #ff2626;
+  font-size: 0.9rem;
+  display: block;
+}
+.form-input .input-control[type='text'],
+.form-input .input-control[type='email'] {
+  height: 45px;
+  padding: 10px;
+  width: 100%;
+  background-color: #ffffff;
+  border: solid 1px #dddddd;
+  border-radius: 4px;
+}
+.form-input .input-control[type='checkbox'] {
+  margin-right: 5px;
+}
+.form-input .input-control.has-error {
+  border-color: #ff2626;
+}
+.form-input .input-control::placeholder {
+  color: rgba(119, 119, 119, 0.5);
+}
+.input-control-error {
+  border-color: #ff2626;
+}
+</style>
