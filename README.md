@@ -1,7 +1,7 @@
 # multi-step form app
 
-![demo1 - landing](./screenshots/landing.png)
-![demo2 - userpage](./screenshots/userpage.png)
+![demo1 - landing](./screenshots/landingpage.png)
+![demo2 - userpage](./screenshots/userdetailpage.png)
 
 ## Description
 
