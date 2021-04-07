@@ -2,6 +2,8 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/7259fdf9-60a1-4b7e-9100-77c6d95325e7/deploy-status)](https://app.netlify.com/sites/vue-multi-steps/deploys)
 
+DEMO: [https://vue-multi-steps.netlify.app/](https://vue-multi-steps.netlify.app/)
+
 This is a simple app that guides a user through a multi-step process to register into a community group.
 
 By filling up the form step-by-step, you will get more information from Github APIs at the end.
